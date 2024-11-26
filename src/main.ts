@@ -2,7 +2,7 @@ import path from 'node:path'
 import type { SFCBlock, SFCDescriptor } from 'vue/compiler-sfc'
 import type { PluginContext, TransformPluginContext } from 'rollup'
 import type { RawSourceMap } from 'source-map'
-import { transformWithEsbuild } from 'vite'
+import { normalizePath, transformWithEsbuild } from 'vite'
 import {
   createDescriptor,
   getPrevDescriptor,
@@ -132,7 +132,22 @@ var __component__ = /*#__PURE__*/__normalizer(
 
   // SSR module registration by wrapping user setup
   if (ssr) {
-    // TODO
+    const normalizedFilename = normalizePath(
+      path.relative(options.root, filename),
+    )
+ 
+    output.push(
+      `import { getCurrentInstance as __vite_getCurrentInstance } from 'vue'`,
+      `const _sfc_setup = _sfc_main.setup`,
+      `_sfc_main.setup = (props, ctx) => {`,
+      `  const instance = __vite_getCurrentInstance()`,
+      `  const ssrContext = instance.proxy.$ssrContext`,
+      `  ;(ssrContext.modules || (ssrContext.modules = new Set())).add(${JSON.stringify(
+        normalizedFilename,
+      )})`,
+      `  return _sfc_setup ? _sfc_setup(props, ctx) : undefined`,
+      `}`,
+    )
   }
 
   let resolvedMap: RawSourceMap | undefined = scriptMap
