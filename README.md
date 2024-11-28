@@ -9,7 +9,7 @@
 
 ```js
 // vite.config.js
-import vue from '@vitejs/plugin-vue2'
+import vue from '@wupo/vite-plugin-vue2'
 
 export default {
   plugins: [vue()]
@@ -123,6 +123,9 @@ export default {
   plugins: [vue(), vueI18nPlugin]
 }
 ```
+
+## difference with official @vitejs/plugin-vue2
+- SSR module registration by wrapping user setup（for ssr ctx.modules & ssr-manifest.json）
 
 ## License
 
