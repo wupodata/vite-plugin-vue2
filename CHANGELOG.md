@@ -1,3 +1,12 @@
+## [2.3.4](https://github.com/wupodata/vite-plugin-vue2/compare/v2.3.3...v2.3.4) (2024-11-29)
+
+
+### Features
+
+* support vite 6 ([#104](https://github.com/wupodata/vite-plugin-vue2/issues/104)) ([80a7442](https://github.com/wupodata/vite-plugin-vue2/commit/80a74425bbae7b5eaf549d32d30b2d046912a797))
+
+
+
 ## [2.3.3](https://github.com/vitejs/vite-plugin-vue2/compare/v2.3.2...v2.3.3) (2024-11-26)
 ### Docs
 * docs: update pgk bug report href and update readme.md
